@@ -19,10 +19,34 @@ module.exports = function(grunt) {
           }
         }
       }
+    },
+    shell: {
+      options: {
+        stdout: true,
+        stderr: true,
+        failOnError: true
+      },
+      remove_init_data: {
+        command: 'mongo <%= config.mongo_db %> --eval "db.dropDatabase()"'
+      },
+      add_init_data: {
+        command: [
+          'mongoimport --db <%= config.mongo_db %> --collection users --type json --file db/users.json --jsonArray',
+          'mongoimport --db <%= config.mongo_db %> --collection countries --type json --file db/countries.json --jsonArray',
+          'mongoimport --db <%= config.mongo_db %> --collection languages --type json --file db/languages.json --jsonArray',
+          'mongoimport --db <%= config.mongo_db %> --collection currencies --type json --file db/currencies.json --jsonArray',
+          'mongoimport --db <%= config.mongo_db %> --collection statuses --type json --file db/statuses.json --jsonArray'
+        ].join('&&')
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('default', ['nodemon']);
+  grunt.registerTask('prepare-db', [
+    'shell:remove_init_data',
+    'shell:add_init_data'
+  ]);
 }
