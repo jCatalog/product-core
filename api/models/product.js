@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 
 // schema
 var ProductSchema = new Schema({
-  tenantId : {type: ObjectId},
+  tenantId : {type: ObjectId, index: true},
   supplierId : {type: ObjectId},
   statusId : {type: ObjectId},
   

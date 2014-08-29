@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
 
 // schema
 var ContractSchema = new Schema({
+  tenantId : {type: ObjectId, index: true},
   currencyId : {type: ObjectId},
   statusId : {type: ObjectId},
   
