@@ -26,6 +26,9 @@ app.use(function(err, req, res, next) {
 // connect to Mongo and set up models
 require('./api/models')();
 
+var mongoose = require('mongoose'),
+  User = mongoose.model('User');
+  
 passport.use(new LocalAPIKeyStrategy(
   function(apikey, done) {
     User.findOne({ apikey: apikey }, function (err, user) {
@@ -38,6 +41,9 @@ passport.use(new LocalAPIKeyStrategy(
 
 // tenants related routes
 require('./api/routes/tenants')(app);
+
+// products related routes
+require('./api/routes/products')(app);
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

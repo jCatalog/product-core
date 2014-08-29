@@ -7,5 +7,6 @@ module.exports = function(app) {
     tenants.index);
 
   app.post('/tenants',
+    auth.authenticate,
     tenants.create);
 };

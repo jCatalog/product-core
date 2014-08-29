@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 exports.ensureTenant = function(req, res, next) {
   var opts = {};
 
-  if (req.params.post_id) { opts._id = req.params.post_id; }
+  if (req.params.tenantId) { opts._id = req.params.tenantId; }
 
   Tenant.findOne(opts, function(err, tenant) {
     if (err) { return res.json(500, { message: 'Internal Server Error' }); }
