@@ -30,6 +30,6 @@ exports.create = function(req, res) {
 
   Tenant.create(tenant, function(err, created) {
     if (err) { return res.json(500, { message: 'Internal Server Error' }); }
-    res.json(201, { id: created._id });
+    res.status(201).json({ id: created._id });
   });
 };
