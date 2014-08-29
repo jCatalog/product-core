@@ -15,7 +15,7 @@ module.exports = function(grunt) {
           },
           env: {
             PORT: '8181',
-            MONGO_URL: '<%= config.mongo_url %>'
+            MONGOLAB_URI: '<%= config.mongo_url %>'
           }
         }
       }
