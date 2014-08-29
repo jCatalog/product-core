@@ -25,7 +25,7 @@ exports.create = function(req, res) {
     statusId: req.body.statusId,
     validFrom: req.body.validFrom,
     validTo: req.body.validTo,
-    created_by: req.user
+    createdBy: req.user
   };
 
   Tenant.create(tenant, function(err, created) {

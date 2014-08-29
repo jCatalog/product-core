@@ -33,7 +33,7 @@ exports.create = function(req, res) {
     isConfigurable: req.body.isConfigurable,
     validFrom: req.body.validFrom,
     validTo: req.body.validTo,
-    created_by: req.user
+    createdBy: req.user
   };
 
   Product.create(product, function(err, created) {
