@@ -7,6 +7,8 @@ exports.index = function(req, res) {
     tenantId: req.tenant._id
   };
 
+  if (req.contract) { opts.contractId = req.contract._id; }
+
   Product.find(opts).stream().pipe(JSONStream.stringify()).pipe(res);
 };
 
