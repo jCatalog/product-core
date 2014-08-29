@@ -4,7 +4,9 @@ var express = require('express'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
-  http = require('http');
+  http = require('http'),
+  passport = require('passport'),
+  LocalAPIKeyStrategy = require('passport-localapikey').Strategy;;
 
 // setup server
 app.set('port', process.env.PORT || 5000);
@@ -23,6 +25,16 @@ app.use(function(err, req, res, next) {
 
 // connect to Mongo and set up models
 require('./api/models')();
+
+passport.use(new LocalAPIKeyStrategy(
+  function(apikey, done) {
+    User.findOne({ apikey: apikey }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      return done(null, user);
+    });
+  }
+));
 
 // tenants related routes
 require('./api/routes/tenants')(app);
