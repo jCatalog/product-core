@@ -1,7 +1,7 @@
 // dependencies
-var mongoose = require('mongoose');
-var timestamps = require('mongoose-timestamp');
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose'),
+  timestamps = require('mongoose-timestamp'),
+  Schema = mongoose.Schema;
 
 // schema
 var UserSchema = new Schema({

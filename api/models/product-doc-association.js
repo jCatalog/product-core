@@ -1,8 +1,8 @@
 // dependencies
-var mongoose = require('mongoose');
-var timestamps = require('mongoose-timestamp');
-var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
+var mongoose = require('mongoose'),
+  timestamps = require('mongoose-timestamp'),
+  Schema = mongoose.Schema,
+  ObjectId = Schema.ObjectId;
 
 // schema
 var ProductDocAssociationSchema = new Schema({
