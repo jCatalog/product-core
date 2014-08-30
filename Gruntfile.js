@@ -37,6 +37,15 @@ module.exports = function(grunt) {
           'mongoimport --db <%= config.mongo_db %> --collection currencies --type json --file db/currencies.json --jsonArray',
           'mongoimport --db <%= config.mongo_db %> --collection statuses --type json --file db/statuses.json --jsonArray'
         ].join('&&')
+      },
+      add_init_production_data: {
+        command: [
+          'mongoimport --host <%= config.mongo_lab_host %> --port <%= config.mongo_lab_port %> -u <%= config.mongo_lab_user %> -p <%= config.mongo_lab_password %> --db <%= config.mongo_lab_db %> --collection users --type json --file db/users.json --jsonArray',
+          'mongoimport --host <%= config.mongo_lab_host %> --port <%= config.mongo_lab_port %> -u <%= config.mongo_lab_user %> -p <%= config.mongo_lab_password %> --db <%= config.mongo_lab_db %> --collection countries --type json --file db/countries.json --jsonArray',
+          'mongoimport --host <%= config.mongo_lab_host %> --port <%= config.mongo_lab_port %> -u <%= config.mongo_lab_user %> -p <%= config.mongo_lab_password %> --db <%= config.mongo_lab_db %> --collection languages --type json --file db/languages.json --jsonArray',
+          'mongoimport --host <%= config.mongo_lab_host %> --port <%= config.mongo_lab_port %> -u <%= config.mongo_lab_user %> -p <%= config.mongo_lab_password %> --db <%= config.mongo_lab_db %> --collection currencies --type json --file db/currencies.json --jsonArray',
+          'mongoimport --host <%= config.mongo_lab_host %> --port <%= config.mongo_lab_port %> -u <%= config.mongo_lab_user %> -p <%= config.mongo_lab_password %> --db <%= config.mongo_lab_db %> --collection statuses --type json --file db/statuses.json --jsonArray'
+        ].join('&&')
       }
     }
   });
@@ -48,5 +57,8 @@ module.exports = function(grunt) {
   grunt.registerTask('prepare-db', [
     'shell:remove_init_data',
     'shell:add_init_data'
+  ]);
+  grunt.registerTask('prepare-db-production', [
+    'shell:add_init_production_data'
   ]);
 }
