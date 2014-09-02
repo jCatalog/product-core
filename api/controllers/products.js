@@ -8,6 +8,9 @@ exports.index = function(req, res) {
   };
 
   if (req.contract) { opts.contractId = req.contract._id; }
+  if (req.query.classGroup) { 
+    opts['classificationGroupAssociations.id'] = { $in: req.classGroups };
+  }
 
   Product.find(opts).stream().pipe(JSONStream.stringify()).pipe(res);
 };

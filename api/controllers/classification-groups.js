@@ -2,6 +2,20 @@ var mongoose = require('mongoose'),
   ClassificationGroup = mongoose.model('ClassificationGroup'),
   JSONStream = require('JSONStream');
 
+exports.ensureClassgroupsByTenant = function(req, res, next) {
+  if(!req.query.classGroup) { return next();}
+  var opts = {
+    tenantId: req.tenant._id
+  };
+
+  ClassificationGroup.find(opts, { item: 1, qty: 1 }).exec(function(err, classGroups) {
+    if (err) { return res.status(500).json({ message: 'Internal Server Error' }); }
+    if (!classGroups) { return res.status(404).json({ message: 'Not Found' }); }
+    req.classGroups = classGroups;
+    next();
+  });
+};
+
 exports.index = function(req, res) {
   var opts = {
     tenantId: req.tenant._id
