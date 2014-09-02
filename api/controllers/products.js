@@ -4,15 +4,24 @@ var mongoose = require('mongoose'),
 
 exports.index = function(req, res) {
   var opts = {
-    tenantId: req.tenant._id
-  };
+      tenantId: req.tenant._id
+    },
+    sort = {};
 
   if (req.contract) { opts.contractId = req.contract._id; }
   if (req.query.classGroup) { 
     opts['classificationGroupAssociations.id'] = { $in: req.classGroups };
   }
 
-  Product.find(opts).stream().pipe(JSONStream.stringify()).pipe(res);
+  if (req.query.sort) { 
+    var keys = req.query.sort.split(',');
+    for (var i in keys) {
+      var item = keys[i].split(':');
+      sort[item[0]] = item[1] === 'desc' ? '-1' : '1';
+    }
+  }
+
+  Product.find(opts).sort(sort).stream().pipe(JSONStream.stringify()).pipe(res);
 };
 
 exports.create = function(req, res) {
