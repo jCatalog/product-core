@@ -11,7 +11,7 @@ module.exports = function(app) {
     classGroups.ensureClassgroupsByTenant,
     products.index);
 
-  app.get('/tenants/:tenantId/contracts/contractId/products',
+  app.get('/tenants/:tenantId/contracts/:contractId/products',
     auth.authenticate,
     tenants.ensureTenant,
     contracts.ensureContract,

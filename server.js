@@ -45,6 +45,12 @@ require('./api/routes/tenants')(app);
 // products related routes
 require('./api/routes/products')(app);
 
+// contracts related routes
+require('./api/routes/contracts')(app);
+
+// classification groups related routes
+require('./api/routes/classification-groups')(app);
+
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });

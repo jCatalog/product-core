@@ -1,6 +1,6 @@
 var auth = require('../controllers/auth'),
   tenants = require('../controllers/tenants'),
-  classificationGroups = require('../controllers/classificationGroups');
+  classificationGroups = require('../controllers/classification-groups');
 
 module.exports = function(app) {
   app.get('/tenants/:tenantId/classificationGroups',
