@@ -7,16 +7,16 @@ var mongoose = require('mongoose'),
 // schema
 var ContractedProductSchema = new Schema({
   productId : {type: ObjectId},
-  statusId : {type: ObjectId},
+  statusId : {type: String},
   
-  extProductId : {type: ObjectId},
-  altExtProductId : {type: ObjectId},
-  extClassificationId : {type: ObjectId},
-  extClassificationGroupId : {type: ObjectId},
-  extGLAccountId : {type: ObjectId},
-  salesUnitOfMeasureId : {type: ObjectId},
-  unitOfMeasureId : {type: ObjectId},
-  currencyId : {type: ObjectId},
+  extProductId : {type: String},
+  altExtProductId : {type: String},
+  extClassificationId : {type: String},
+  extClassificationGroupId : {type: String},
+  extGLAccountId : {type: String},
+  salesUnitOfMeasureId : {type: String},
+  unitOfMeasureId : {type: String},
+  currencyId : {type: String},
 
   descLong : {type: String},
   descShort : {type: String},
@@ -32,8 +32,8 @@ var ContractedProductSchema = new Schema({
   discount : {type: Number},
   statusDate : {type: Date},
 
-  createdBy : {type: ObjectId},
-  updatedBy : {type: ObjectId}
+  createdBy : {type: String},
+  updatedBy : {type: String}
 });
 
 // timestamps

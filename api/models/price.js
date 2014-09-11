@@ -7,12 +7,12 @@ var mongoose = require('mongoose'),
 // schema
 var PriceSchema = new Schema({
   productId : {type: ObjectId},
-  contractId : {type: ObjectId},
-  statusId : {type: ObjectId},
-  currencyId : {type: ObjectId},
-  priceTypeId : {type: ObjectId},
-  unitOfMeasureId : {type: ObjectId},
-  productIdExtensionForUoM : {type: ObjectId},
+  contractId : {type: String},
+  statusId : {type: String},
+  currencyId : {type: String},
+  priceTypeId : {type: String},
+  unitOfMeasureId : {type: String},
+  productIdExtensionForUoM : {type: String},
 
   netPrice : {type: Number},
   validFromQuantity : {type: Number},
@@ -24,8 +24,8 @@ var PriceSchema = new Schema({
   validFrom : {type: Date},
   validTo : {type: Date},
 
-  createdBy : {type: ObjectId},
-  updatedBy : {type: ObjectId}
+  createdBy : {type: String},
+  updatedBy : {type: String}
 });
 
 // timestamps

@@ -7,16 +7,16 @@ var mongoose = require('mongoose'),
 // schema
 var ProductDocAssociationSchema = new Schema({
   productId : {type: ObjectId},
-  documentViewTypeId : {type: ObjectId},
-  languageId : {type: ObjectId},
+  documentViewTypeId : {type: String},
+  languageId : {type: String},
   
   description : {type: String},
 
   validFrom : {type: Date},
   validTo : {type: Date},
 
-  createdBy : {type: ObjectId},
-  updatedBy : {type: ObjectId}
+  createdBy : {type: String},
+  updatedBy : {type: String}
 });
 
 // timestamps

@@ -7,13 +7,13 @@ var mongoose = require('mongoose'),
 // schema
 var Product2ClassificationGroupSchema = new Schema({
   productId : {type: ObjectId},
-  classificationId : {type: ObjectId},
-  classificationGroupId : {type: ObjectId},
+  classificationId : {type: String},
+  classificationGroupId : {type: String},
   
   orderNro : {type: Number},
 
-  createdBy : {type: ObjectId},
-  updatedBy : {type: ObjectId}
+  createdBy : {type: String},
+  updatedBy : {type: String}
 });
 
 // timestamps

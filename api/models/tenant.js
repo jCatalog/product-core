@@ -6,15 +6,15 @@ var mongoose = require('mongoose'),
 
 // schema
 var TenantSchema = new Schema({
-  statusId : {type: ObjectId},
+  statusId : {type: String},
   
   description : {type: String},
 
   validFrom : {type: Date},
   validTo : {type: Date},
 
-  createdBy : {type: ObjectId},
-  updatedBy : {type: ObjectId},
+  createdBy : {type: String},
+  updatedBy : {type: String},
 
   products : [{ type: ObjectId, ref: 'Product' }],
   catalogsProvisioning : [{ type: ObjectId, ref: 'CatalogProvisioning' }],

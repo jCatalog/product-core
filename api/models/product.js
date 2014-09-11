@@ -7,19 +7,19 @@ var mongoose = require('mongoose'),
 // schema
 var ProductSchema = new Schema({
   tenantId : {type: ObjectId, index: true},
-  supplierId : {type: ObjectId},
-  statusId : {type: ObjectId},
+  supplierId : {type: String},
+  statusId : {type: String},
   
-  mfgProductId : {type: ObjectId},
+  mfgProductId : {type: String},
   mfgProductName : {type: String},
   
-  manufactererId : {type: ObjectId},
+  manufactererId : {type: String},
   manufactererName : {type: String},
   
-  extProductId : {type: ObjectId},
-  productIdExtension : {type: ObjectId},
-  unitOfMeasureId : {type: ObjectId},
-  salesUnitOfMeasureId : {type: ObjectId},
+  extProductId : {type: String},
+  productIdExtension : {type: String},
+  unitOfMeasureId : {type: String},
+  salesUnitOfMeasureId : {type: String},
 
   keywords : [{type: String}],
   ean : {type: String},
@@ -34,8 +34,8 @@ var ProductSchema = new Schema({
   validFrom : {type: Date},
   validTo : {type: Date},
 
-  createdBy : {type: ObjectId},
-  updatedBy : {type: ObjectId},
+  createdBy : {type: String},
+  updatedBy : {type: String},
 
   classificationGroupAssociations : [{ type: ObjectId, ref: 'Product2ClassificationGroup' }],
   attributeValues : [{ type: ObjectId, ref: 'ProductAttributeValue' }],

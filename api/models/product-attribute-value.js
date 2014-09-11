@@ -1,13 +1,12 @@
 // dependencies
 var mongoose = require('mongoose'),
   timestamps = require('mongoose-timestamp'),
-  Schema = mongoose.Schema,
-  ObjectId = Schema.ObjectId;
+  Schema = mongoose.Schema;
 
 // schema
 var ProductAttributeValueSchema = new Schema({
-  statusId : {type: ObjectId},
-  languageId : {type: ObjectId},
+  statusId : {type: String},
+  languageId : {type: String},
   
   attribute : {type: String, enum: [
     'LongDescription', 
@@ -27,8 +26,8 @@ var ProductAttributeValueSchema = new Schema({
   value : {type: String},
   orderNro : {type: Number},
 
-  createdBy : {type: ObjectId},
-  updatedBy : {type: ObjectId}
+  createdBy : {type: String},
+  updatedBy : {type: String}
 });
 
 // timestamps

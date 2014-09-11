@@ -7,11 +7,11 @@ var mongoose = require('mongoose'),
 // schema
 var ProductRelationSchema = new Schema({
   relatedProductId : {type: ObjectId},
-  relatedCatalogId : {type: ObjectId},
-  typeId : {type: ObjectId},
-  statusId : {type: ObjectId},
-  syncTypeId : {type: ObjectId},
-  selectionGroupId : {type: ObjectId},
+  relatedCatalogId : {type: String},
+  typeId : {type: String},
+  statusId : {type: String},
+  syncTypeId : {type: String},
+  selectionGroupId : {type: String},
   
   quantity : {type: Number},
 
@@ -30,15 +30,15 @@ var ProductRelationSchema = new Schema({
   isDefaultSelected : {type: Boolean},
 
   descriptions: {
-    languageId : {type: ObjectId},
+    languageId : {type: String},
     description : {type: String}, 
   },
 
   validFrom : {type: Date},
   validTo : {type: Date},
 
-  createdBy : {type: ObjectId},
-  updatedBy : {type: ObjectId}
+  createdBy : {type: String},
+  updatedBy : {type: String}
 });
 
 // timestamps
