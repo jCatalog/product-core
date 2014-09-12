@@ -4,31 +4,104 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   ObjectId = Schema.ObjectId;
 
-// schema
+/**
+ * <p>Product's price for defined contract (contractId), validFromQuantity, currency (currencyId), valid range (validFrom - validTo) and priceType (priceType)</p>
+ *
+ * The <code>netPrice</code> field defines price value.
+ *
+ * @author Alexander Pyrkh
+ */
 var PriceSchema = new Schema({
+  /**
+   * Price belongs to the <code>product</code>
+   */
   productId : {type: ObjectId},
-  contractId : {type: String},
-  statusId : {type: String},
-  currencyId : {type: String},
-  priceTypeId : {type: String},
-  unitOfMeasureId : {type: String},
-  productIdExtensionForUoM : {type: String},
 
+  /**
+   * Identifier of Contract.
+   */
+  contractId : {type: String},
+
+  /**
+   * Identifier of price Status.
+   */
+  statusId : {type: String},
+
+  /**
+   * Identifier of Currency.
+   */
+  currencyId : {type: String},
+
+  /**
+   * Identifier of Price type.
+   */
+  priceTypeId : {type: String},
+
+  /**
+   * Value of Price.
+   */
   netPrice : {type: Number},
+
+  /**
+   * Price is valid from quantity
+   */
   validFromQuantity : {type: Number},
-  priceUnit : {type: Number},
-  vatPercentage : {type: Number},
-  description : {type: String},
-  isPreferred : {type: Boolean},
+
+  /**
+   * Price valid range from.
+   */
 
   validFrom : {type: Date},
+  /**
+   * Price valid range to.
+   */
   validTo : {type: Date},
+  
+  /**
+   * Identifier of UnitOfMeasure for Price.
+   */
+  unitOfMeasureId : {type: String},
 
+  /**
+   * ProductIdExtensionForUoM.
+   */
+  productIdExtensionForUoM : {type: String},
+
+  /**
+   * Price unit.
+   */
+  priceUnit : {type: Number},
+
+  /**
+   * Description.
+   */
+  description : {type: String},
+
+  /**
+   * Vat percentage.
+   */
+  vatPercentage : {type: Number},
+
+  /**
+   * Is preferred.
+   */
+  isPreferred : {type: Boolean},
+
+  /**
+   * User name who has created the Price.
+   */
   createdBy : {type: String},
+
+  /**
+   * User name who has changed the Price last time.
+   */
   updatedBy : {type: String}
 });
 
-// timestamps
+/**
+ * Date when the Price was created.
+ * Date when the Price was changed last time.
+ */
 PriceSchema.plugin(timestamps);
 
 // export
