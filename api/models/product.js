@@ -170,5 +170,32 @@ var ProductSchema = new Schema({
  */
 ProductSchema.plugin(timestamps);
 
+
+/**
+ * Find Product Methods
+ */
+ProductSchema.statics.findProductByID = function(tenantId, id, cb) {
+  this.findOne({_id: id, tenantId: tenantId}, cb);
+}
+
+ProductSchema.statics.findProductsByClassGrp = function(tenantId, classificationId, classGrpId, cb) {
+  var stream = this.find({
+    tenantId: tenantId, 
+    'classificationGroupAssociations.classificationId': classificationId,
+    'classificationGroupAssociations.classificationGroupId': classGrpId 
+  }).stream();
+
+  return cb(stream);
+}
+
+ProductSchema.statics.findProductsByClassGrps = function(tenantId, classGroups, cb) {
+  var stream = this.find({
+    tenantId: tenantId, 
+    'classificationGroupAssociations.classificationGroupId': { $in: req.classGroups }
+  }).stream();
+  
+  return cb(stream);
+}
+
 // export
 module.exports = mongoose.model('Product', ProductSchema);
