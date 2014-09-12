@@ -175,7 +175,7 @@ ProductSchema.plugin(timestamps);
  * Find Product Methods
  */
 ProductSchema.statics.findProductByID = function(tenantId, id, cb) {
-  this.findOne({_id: id, tenantId: tenantId}, cb);
+  this.findOne({_id: id, tenantId: tenantId}).populate('attributeValues').exec(cb);
 }
 
 ProductSchema.statics.findProductsByClassGrp = function(tenantId, classificationId, classGrpId, cb) {
@@ -183,7 +183,7 @@ ProductSchema.statics.findProductsByClassGrp = function(tenantId, classification
     tenantId: tenantId, 
     'classificationGroupAssociations.classificationId': classificationId,
     'classificationGroupAssociations.classificationGroupId': classGrpId 
-  }).stream();
+  }).populate('attributeValues').stream();
 
   return cb(stream);
 }
@@ -192,7 +192,7 @@ ProductSchema.statics.findProductsByClassGrps = function(tenantId, classGroups, 
   var stream = this.find({
     tenantId: tenantId, 
     'classificationGroupAssociations.classificationGroupId': { $in: req.classGroups }
-  }).stream();
+  }).populate('attributeValues').stream();
   
   return cb(stream);
 }
