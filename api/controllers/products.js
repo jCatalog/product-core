@@ -3,8 +3,10 @@ var mongoose = require('mongoose'),
   JSONStream = require('JSONStream');
 
 exports.index = function(req, res) {
+  if (!req.params.tenantId) { return res.json(404).json({ message: 'Bad Request' }) }
+
   var opts = {
-      tenantId: req.tenant._id
+      tenantId: req.params.tenantId
     },
     sort = {};
 
@@ -25,8 +27,10 @@ exports.index = function(req, res) {
 };
 
 exports.create = function(req, res) {
+  if (!req.body.tenantId) { return res.json(404).json({ message: 'Bad Request' }) }
+    
   var product = {
-    tenantId: req.tenant._id,
+    tenantId: req.body.tenantId,
     supplierId: req.body.supplierId,
     statusId: req.body.statusId,
     mfgProductId: req.body.mfgProductId,

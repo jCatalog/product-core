@@ -19,7 +19,7 @@ var ProductSchema = new Schema({
   /**
    * Identifier of Product's Tenant this product is listed in.
    */
-  tenantId : {type: ObjectId, index: true},
+  tenantId : {type: String, unique: true, index: true},
 
   /**
    * Identifier of the Supplier who own the product.

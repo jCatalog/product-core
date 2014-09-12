@@ -26,22 +26,6 @@ app.use(function(err, req, res, next) {
 // connect to Mongo and set up models
 require('./api/models')();
 
-var mongoose = require('mongoose'),
-  User = mongoose.model('User');
-  
-passport.use(new LocalAPIKeyStrategy(
-  function(apikey, done) {
-    User.findOne({ apikey: apikey }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
-      return done(null, user);
-    });
-  }
-));
-
-// tenants related routes
-require('./api/routes/tenants')(app);
-
 // products related routes
 require('./api/routes/products')(app);
 
