@@ -1,0 +1,29 @@
+{
+  "name": "jCatalog",
+  "version": "0.0.1",
+  "authors": [
+    "Ezequiel Morito <mail@ezequielmorito.com.ar>"
+  ],
+  "description": "jCatalog Data Model - Performance Tests",
+  "main": "server.js",
+  "keywords": [
+    "jCatalog",
+    "mongodb",
+    "mongoose",
+    "angular"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.25",
+    "bootstrap": "~3.2.0",
+    "jquery": "~2.1.1",
+    "requirejs": "~2.1.15"
+  }
+}
