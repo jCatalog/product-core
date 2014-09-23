@@ -5,8 +5,6 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
   http = require('http'),
-  passport = require('passport'),
-  LocalStrategy = require('passport-local').Strategy,
   engine = require('ejs-locals');
 
 // setup view engine
@@ -34,41 +32,12 @@ app.use(function(err, req, res, next) {
 // connect to Mongo and set up models
 require('./api/models')();
 
-// setup passport strategy
-var mongoose = require('mongoose'),
-  User = mongoose.model('User');
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
-
 // products related routes
 require('./api/routes/products')(app);
 
 app.get('/', function(req, res){
   res.render('home/index');
 });
-
-app.get('/login', function(req, res){
-  res.render('login');
-});
-
-app.post('/login',
-  passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/login',
-                                   failureFlash: true })
-);
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
