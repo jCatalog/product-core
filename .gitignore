@@ -26,3 +26,12 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+<<<<<<< HEAD
+=======
+
+# Environment Variables
+config.json
+
+# OS X Mac files
+.DS_Store
+>>>>>>> nodejs/master
