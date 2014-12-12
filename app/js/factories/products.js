@@ -9,6 +9,10 @@ define(['app'], function (app) {
           return angular.fromJson(data);
         },
         isArray: true
+      },
+      bulk: {
+        method: 'POST',
+        url: '/api/products'
       }
     });
   }]);

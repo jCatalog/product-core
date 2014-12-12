@@ -6,4 +6,7 @@ module.exports = function(app) {
 
   app.post('/api/tenant/:tenantId/products',
     products.create);
+
+  app.post('/api/products',
+    products.bulkInsert);
 };

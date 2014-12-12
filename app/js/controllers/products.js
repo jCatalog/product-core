@@ -8,6 +8,12 @@ define(['app', 'factories/products'], function (app) {
           $scope.products = products;
         });
       };
+
+      $scope.bulk = function() {
+        ProductsService.bulk().$promise.then(function() {
+          console.log('done');
+        });
+      };
     }
   ]);
 });
