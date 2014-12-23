@@ -1,7 +1,8 @@
 // connect to Mongo and set up models
 require('./api/models')();
 
-var Product = mongoose.model('Product'),
+var mongoose = require('mongoose'),
+    Product = mongoose.model('Product'),
     kue = require('kue'), 
     jobs = kue.createQueue({
       prefix: 'q',
