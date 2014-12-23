@@ -12,6 +12,7 @@ function start() {
   var queue = jackrabbit(process.env.CLOUDAMQP_URL);
   console.log('after jackrabbit');
   queue.on('connected', function() {
+    console.log('successfully connection');
     queue.handle('insert', function(job, ack) {
       console.log('Start Job');
       var products = new Array(10000000);
