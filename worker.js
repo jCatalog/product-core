@@ -1,4 +1,5 @@
-var kue = require('kue'), 
+var Product = mongoose.model('Product'),
+    kue = require('kue'), 
     jobs = kue.createQueue({
       prefix: 'q',
       redis: {
