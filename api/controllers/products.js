@@ -67,7 +67,7 @@ exports.bulkInsert = function(req, res) {
   var queue = jackrabbit(process.env.CLOUDAMQP_URL);
   queue.on('connected', function() {
     queue.create('jobs.perf.tests', { prefetch: 5 }, function() {
-      queue.publish('insert', {});
+      queue.publish('jobs.perf.tests', { name: 'insert-test' });
       res.json(200);
     });
   });
