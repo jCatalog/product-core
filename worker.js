@@ -14,11 +14,10 @@ require('./api/models')();
 jobs.process('perf.tests', function(job, done){
   console.log('Started job ' + job.data.name);
 
-  var products = new Array(10000000);
   var i = 0;
   for (var x = 1; x <= 1000; x++) {
     for (var y = 1; y <= 10000; y++) {
-      var product = {
+      Product.create({
         tenantId: x,
         supplierId: '1',
         statusId: '1',
@@ -41,14 +40,9 @@ jobs.process('perf.tests', function(job, done){
         validFrom: '2014-12-05',
         validTo: '2015-06-01',
         createdBy: 'foo@bar'
-      };
-
-      products[i] = product;
-      i++;
+      });
     };
   };
 
-  Product.collection.insert(products, function(a) {
-    console.log('done')
-  });
+  
 });
