@@ -2,14 +2,14 @@ var mongoose = require('mongoose'),
   Product = mongoose.model('Product'),
   JSONStream = require('JSONStream'),
   kue = require('kue'), 
-  jobs = kue.createQueue(
+  jobs = kue.createQueue({
     prefix: 'q',
     redis: {
       port: 9344,
       host: 'mummichog.redistogo.com',
       auth: 'c813394adbbe7d8afb74b095a0906bbe'
     }
-  );
+  });
 
 exports.index = function(req, res) {
   if (!req.params.tenantId) { return res.json(404).json({ message: 'Bad Request' }) }
