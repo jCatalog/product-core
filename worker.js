@@ -8,7 +8,9 @@ throng(start, { workers: 1 });
 
 function start() {
   console.log('Started worker');
+  console.log('before jackrabbit');
   var queue = jackrabbit(process.env.CLOUDAMQP_URL);
+  console.log('after jackrabbit');
   queue.on('connected', function() {
     queue.handle('insert', function(job, ack) {
       console.log('Start Job');
