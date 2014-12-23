@@ -6,8 +6,9 @@ require('./api/models')();
 
 var queue = jackrabbit(process.env.CLOUDAMQP_URL);
 queue.on('connected', function() {
-  queue.handle('insert', function(job, ack) {
-    console.log('Start Job');
-    ack();
-  });
+  console.log('hasta acá llega');
+  // queue.handle('insert', function(job, ack) {
+  //   console.log('Start Job');
+  //   ack();
+  // });
 });
