@@ -11,6 +11,7 @@ function start() {
   var queue = jackrabbit(process.env.CLOUDAMQP_URL);
   queue.on('connected', function() {
     queue.handle('insert', function(job, ack) {
+      console.log('Start Job');
       var products = new Array(10000000);
       var i = 0;
       for (var x = 1; x <= 1000; x++) {
@@ -46,6 +47,7 @@ function start() {
       };
 
       Product.collection.insert(products, function(a) {
+        ack();
         process.on('SIGTERM', function() {
           console.log('Worker exiting');
           process.exit();
