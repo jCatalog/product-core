@@ -1,3 +1,6 @@
+// connect to Mongo and set up models
+require('./api/models')();
+
 var Product = mongoose.model('Product'),
     kue = require('kue'), 
     jobs = kue.createQueue({
@@ -8,9 +11,6 @@ var Product = mongoose.model('Product'),
         auth: 'c813394adbbe7d8afb74b095a0906bbe'
       }
     });
-
-// connect to Mongo and set up models
-require('./api/models')();
 
 jobs.process('perf.tests', function(job, done){
   console.log('Started job ' + job.data.name);
