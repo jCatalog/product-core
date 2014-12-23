@@ -51,10 +51,6 @@ function start() {
 
       Product.collection.insert(products, function(a) {
         ack();
-        process.on('SIGTERM', function() {
-          console.log('Worker exiting');
-          process.exit();
-        });
       });
     });
   });
