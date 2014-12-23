@@ -62,8 +62,13 @@ exports.create = function(req, res) {
 };
 
 exports.bulkInsert = function(req, res) {
+  console.log(process.env.CLOUDAMQP_URL);
+
   var queue = jackrabbit(process.env.CLOUDAMQP_URL);
-  queue.create('jobs.perf.tests');
-  queue.publish('insert', {});
-  res.json({});
+  queue.on('connected', function() {
+    queue.create('jobs.perf.tests', { prefetch: 5 }, function() {
+      queue.publish('insert', {});
+      res.json(200);
+    });
+  });
 }
