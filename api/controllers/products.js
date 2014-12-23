@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
   Product = mongoose.model('Product'),
-  JSONStream = require('JSONStream');
+  JSONStream = require('JSONStream'),
+  jackrabbit = require('jackrabbit');
 
 exports.index = function(req, res) {
   if (!req.params.tenantId) { return res.json(404).json({ message: 'Bad Request' }) }
@@ -27,10 +28,10 @@ exports.index = function(req, res) {
 };
 
 exports.create = function(req, res) {
-  if (!req.body.tenantId) { return res.json(404).json({ message: 'Bad Request' }) }
+  if (!req.params.tenantId) { return res.json(404).json({ message: 'Bad Request' }) }
     
   var product = {
-    tenantId: req.body.tenantId,
+    tenantId: req.params.tenantId,
     supplierId: req.body.supplierId,
     statusId: req.body.statusId,
     mfgProductId: req.body.mfgProductId,
@@ -61,38 +62,8 @@ exports.create = function(req, res) {
 };
 
 exports.bulkInsert = function(req, res) {
-  var products = []
-
-  for (var x = 0; x <= 1000; x++) {
-    for (var y = 0; y <= 10000; y++) {
-      var product = {
-        tenantId: x,
-        supplierId: '1',
-        statusId: '1',
-        mfgProductId: '1',
-        mfgProductName: 'Test',
-        manufactererId: '1',
-        manufactererName: 'Test',
-        extProductId: '1',
-        productIdExtension: '1',
-        unitOfMeasureId: '1',
-        salesUnitOfMeasureId: '1',
-        keywords: 'key-1, key-2',
-        ean: '123456',
-        isMainProdLine: true,
-        isForSales: true,
-        isSpecialOffer: true,
-        isStocked: true,
-        isPunchout: true,
-        isConfigurable: true,
-        validFrom: '2014-12-05',
-        validTo: '2015-06-01',
-        createdBy: 'foo@bar'
-      };
-
-      products.push(product);
-    };
-  };
-
-  Product.insert(products);
+  var queue = jackrabbit(process.env.CLOUDAMQP_URL);
+  queue.create('jobs.perf.tests');
+  queue.publish('insert', {});
+  res.json({});
 }
