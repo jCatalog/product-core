@@ -74,7 +74,6 @@ exports.bulkInsert = function(req, res) {
     name: 'insert'
   }).save( function(err){
      if( !err ) {
-      console.log( job.id );
       res.json(200);
     }
   });
