@@ -1,7 +1,15 @@
 var mongoose = require('mongoose'),
   Product = mongoose.model('Product'),
   JSONStream = require('JSONStream'),
-  jackrabbit = require('jackrabbit');
+  kue = require('kue'), 
+  jobs = kue.createQueue(
+    prefix: 'q',
+    redis: {
+      port: 9344,
+      host: 'mummichog.redistogo.com',
+      auth: 'c813394adbbe7d8afb74b095a0906bbe'
+    }
+  );
 
 exports.index = function(req, res) {
   if (!req.params.tenantId) { return res.json(404).json({ message: 'Bad Request' }) }
@@ -62,13 +70,12 @@ exports.create = function(req, res) {
 };
 
 exports.bulkInsert = function(req, res) {
-  console.log(process.env.CLOUDAMQP_URL);
-
-  var queue = jackrabbit(process.env.CLOUDAMQP_URL);
-  queue.on('connected', function() {
-    queue.create('jobs.perf.tests', { prefetch: 5 }, function() {
-      queue.publish('jobs.perf.tests', { name: 'insert-test' });
+  var job = jobs.create('perf.tests', {
+    name: 'insert'
+  }).save( function(err){
+     if( !err ) {
+      console.log( job.id );
       res.json(200);
-    });
+    }
   });
 }
