@@ -43,5 +43,6 @@ jobs.process('perf.tests', function(job, done){
     });
   };
 
+  done();
   
 });
