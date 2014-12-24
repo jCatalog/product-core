@@ -44,6 +44,7 @@ jobs.process('perf.tests', function(job, done){
               validTo: '2015-06-01',
               createdBy: 'foo@bar'
             });
+            console.log('  - Inserted-1');
             callback(null);
         },
         function(callback){
@@ -71,7 +72,7 @@ jobs.process('perf.tests', function(job, done){
               validTo: '2015-06-01',
               createdBy: 'foo@bar'
             });
-
+            console.log('  - Inserted-2');
             callback(null);
         },
         function(callback){
@@ -99,7 +100,7 @@ jobs.process('perf.tests', function(job, done){
               validTo: '2015-06-01',
               createdBy: 'foo@bar'
             });
-
+            console.log('  - Inserted-3');
             callback(null);
         },
         function(callback){
@@ -127,11 +128,11 @@ jobs.process('perf.tests', function(job, done){
               validTo: '2015-06-01',
               createdBy: 'foo@bar'
             });
-
+            console.log('  - Inserted-4');
             callback(null);
         }
       ]);  
     }
-
+    console.log('Finished job ' + job.data.name);
     done();
   });
