@@ -134,5 +134,6 @@ jobs.process('perf.tests', function(job, done){
       // optional callback
       function(err, results){
         done();
-    });  
-});
+      });  
+    }
+  });
