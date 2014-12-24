@@ -73,8 +73,10 @@ exports.bulkInsert = function(req, res) {
   var job = jobs.create('perf.tests', {
     name: 'insert'
   }).save( function(err){
-     if( !err ) {
+    if( !err ) {
       res.json(200);
+    } else {
+      res.json(500, { err: err });
     }
   });
 }
