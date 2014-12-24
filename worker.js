@@ -41,6 +41,10 @@ jobs.process('perf.tests', function(job, done){
       validFrom: '2014-12-05',
       validTo: '2015-06-01',
       createdBy: 'foo@bar'
+    }, function(err) {
+      if (err) {
+        console.log(err);
+      }
     });
     console.log('  - Inserted-'+x);
   }
