@@ -95,8 +95,6 @@ exports.exportToFile = function(req, res) {
       sort[item[0]] = item[1] === 'desc' ? '-1' : '1';
     }
   }
-  
-  var gfs = new Grid(mongoose.connection.db, mongoose.mongo);
 
   Product
     .find({tenantId: req.params.tenantId})
