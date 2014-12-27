@@ -79,4 +79,29 @@ exports.bulkInsert = function(req, res) {
       res.json(500, { err: err });
     }
   });
-}
+};
+
+exports.exportToFile = function(req, res) {
+  var sort = {};
+  res.writeHead(200, {
+    'Content-Type': 'text/plain',
+    'Content-Disposition': 'attachment; filename=export.txt'
+  });
+
+  if (req.query.sort) { 
+    var keys = req.query.sort.split(',');
+    for (var i in keys) {
+      var item = keys[i].split(':');
+      sort[item[0]] = item[1] === 'desc' ? '-1' : '1';
+    }
+  }
+  
+  var gfs = new Grid(mongoose.connection.db, mongoose.mongo);
+
+  Product
+    .find({tenantId: req.params.tenantId})
+    .sort(sort)
+    .stream()
+    .pipe(JSONStream.stringify())
+    .pipe(res);
+};

@@ -9,4 +9,7 @@ module.exports = function(app) {
 
   app.post('/api/products',
     products.bulkInsert);
+
+  app.get('/api/tenant/:tenantId/csv/products',
+    products.exportToFile);
 };
