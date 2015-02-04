@@ -10,7 +10,7 @@ var startTime = (new Date()).getTime();
 while (i < 1000) {
   var y = 0;
   
-  while (y < 200) {
+  while (y < 10000) {
     Product.create({
       tenantId: i,
       supplierId: '1',
