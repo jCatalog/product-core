@@ -26,3 +26,19 @@ grunt prepare-db
 ```bash
 grunt
 ```
+
+### Performance Test
+
+Create the `config.json` file in the root folder with the following content:
+
+```json
+{
+  "mongo_url": "mongodb://127.0.0.1/jCatalog-development"
+}
+```
+
+And run:
+
+```bash
+grunt performance-test
+```
