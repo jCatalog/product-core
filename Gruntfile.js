@@ -21,6 +21,11 @@ module.exports = function(grunt) {
         }
       }
     },
+    env : {
+      dev : {
+        MONGOLAB_URI: '<%= config.mongo_url %>'
+      }
+    },
     shell: {
       options: {
         stdout: true,
@@ -47,12 +52,16 @@ module.exports = function(grunt) {
           'mongoimport --host <%= config.mongo_lab_host %> --port <%= config.mongo_lab_port %> -u <%= config.mongo_lab_user %> -p <%= config.mongo_lab_password %> --db <%= config.mongo_lab_db %> --collection currencies --type json --file db/currencies.json --jsonArray',
           'mongoimport --host <%= config.mongo_lab_host %> --port <%= config.mongo_lab_port %> -u <%= config.mongo_lab_user %> -p <%= config.mongo_lab_password %> --db <%= config.mongo_lab_db %> --collection statuses --type json --file db/statuses.json --jsonArray'
         ].join('&&')
+      },
+      performance: {
+        command: 'node ./performance_tests/*-test.js'
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-env');
 
   grunt.registerTask('default', ['nodemon']);
   grunt.registerTask('prepare-db', [
@@ -62,4 +71,5 @@ module.exports = function(grunt) {
   grunt.registerTask('prepare-db-production', [
     'shell:add_init_production_data'
   ]);
+  grunt.registerTask('performance-test', ['env:dev', 'shell:performance']);
 }
